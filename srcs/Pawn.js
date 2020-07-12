@@ -17,12 +17,20 @@ class Pawn {
             blackPawn.addEventListener("click",function(){
 
                 if(whiteTurn == false){
+                    removeRedColorFromSquares();
                     let number = parseInt(this.parentNode.id.split("square")[1]);
                     console.log(number);
-                    let walk = document.querySelector(`#square${number+8}`);
+                    if((number <= 15) && (number > 8)){
+                        for(let i=0; i < 2;i++){
+                            let walk = document.querySelector(`#square${number+(8*(i+1))}`);
+                            walk.classList.add("moveTo");
+                        }
+                    } else{
+                        let walk = document.querySelector(`#square${number+8}`);
+                        walk.classList.add("moveTo");
+                    }
                     elementToMove = this;
                     blackPawn.parentNode.classList.remove("blackPawn");
-                    walk.classList.add("moveTo");
                     classToAdd = "blackPawn";
                 }
                 
@@ -39,6 +47,7 @@ class Pawn {
 
             whitePawn.addEventListener("click",function(){
 
+                removeRedColorFromSquares();
                 if(whiteTurn == true){
                     let number = parseInt(this.parentNode.id.split("square")[1]);
                     console.log(number);

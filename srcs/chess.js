@@ -15,6 +15,7 @@ let chessBoard = {
                     boardSquare.classList.remove("moveTo");
                     boardSquare.classList.add(classToAdd);
                     whiteTurn = !whiteTurn;
+                    removeRedColorFromSquares();
                 }
             })
 
@@ -36,6 +37,7 @@ let chessBoard = {
                     boardSquare.classList.remove("moveTo");
                     boardSquare.classList.add(classToAdd);
                     whiteTurn = !whiteTurn;
+                    removeRedColorFromSquares();
                 }
             })
 

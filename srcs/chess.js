@@ -14,6 +14,7 @@ let chessBoard = {
                     boardSquare.appendChild(elementToMove);
                     boardSquare.classList.remove("moveTo");
                     boardSquare.classList.add(classToAdd);
+                    parentToRemoveClass.classList.remove(classToRemove);
                     whiteTurn = !whiteTurn;
                     removeRedColorFromSquares();
                 }
@@ -36,6 +37,7 @@ let chessBoard = {
                     boardSquare.appendChild(elementToMove);
                     boardSquare.classList.remove("moveTo");
                     boardSquare.classList.add(classToAdd);
+                    parentToRemoveClass.classList.remove(classToRemove);
                     whiteTurn = !whiteTurn;
                     removeRedColorFromSquares();
                 }
@@ -62,9 +64,9 @@ let chessBoard = {
         let bKnight2 = new Knight("black");
         let squareKnight1 = document.querySelector("#square1");
         let squareKnight6 = document.querySelector("#square6");
-        squareKnight1.appendChild(bKnight1.sprite());
+        squareKnight1.appendChild(bKnight1.sprite(1));
         squareKnight1.classList.add("blackKnight");
-        squareKnight6.appendChild(bKnight2.sprite());
+        squareKnight6.appendChild(bKnight2.sprite(2));
         squareKnight6.classList.add("blackKnight");
 
         let bRook1 = new Rook("black");

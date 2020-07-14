@@ -82,9 +82,9 @@ let chessBoard = {
         let bBishop2 = new Bishop("black");
         let squareBishop2 = document.querySelector("#square2");
         let squareBishop5 = document.querySelector("#square5");
-        squareBishop2.appendChild(bBishop1.sprite());
+        squareBishop2.appendChild(bBishop1.sprite(1));
         squareBishop2.classList.add("blackBishop");
-        squareBishop5.appendChild(bBishop2.sprite());
+        squareBishop5.appendChild(bBishop2.sprite(2));
         squareBishop5.classList.add("blackBishop");
 
         let bQueen = new Queen("black");

@@ -54,6 +54,7 @@ class Knight {
         } else{
             let whiteKnight = document.createElement("img");
             whiteKnight.src = "pngs/whiteKnight.png";
+            whiteKnight.id = `whiteKnight${newId}`;
 
             whiteKnight.addEventListener("click", function(){
                 if(whiteTurn == true){

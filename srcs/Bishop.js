@@ -34,7 +34,15 @@ class Bishop {
                         for(let j=0; j<diagonals[0].length;j++){
                             if(diagonals[i][j]==null){
                                 break;
-                            } else if(diagonals[i][j].hasChildNodes()){
+                            } else if((this.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                            ((i==1) || (i==2))){
+                                break;
+
+                            } else if((this.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                            ((i==0) || (i==3))){
+                                break;
+
+                            }else if(diagonals[i][j].hasChildNodes()){
 
                                 if((diagonals[i][j].childNodes[0].classList.contains("pieces")) && 
                                    (findingWhite.test(diagonals[i][j].childNodes[0].id))){
@@ -97,6 +105,14 @@ class Bishop {
                         for(let j=0; j<diagonals[0].length;j++){
                             if(diagonals[i][j]==null){
                                 break;
+                            } else if((this.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                                     ((i==1) || (i==2))){
+                                break;
+
+                            } else if((this.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                            ((i==0) || (i==3))){
+                                break;
+
                             } else if(diagonals[i][j].hasChildNodes()){
 
                                 if((diagonals[i][j].childNodes[0].classList.contains("pieces")) && 

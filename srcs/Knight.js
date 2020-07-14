@@ -18,7 +18,6 @@ class Knight {
                 if(whiteTurn == false){
                     removeRedColorFromSquares();
                     let number = parseInt(this.parentNode.id.split("square")[1]);
-                    console.log(number);
                     let walk = [document.querySelector(`#square${number-17}`),
                                 document.querySelector(`#square${number-15}`),
                                 document.querySelector(`#square${number-10}`),
@@ -32,6 +31,14 @@ class Knight {
                     for (let i=0; i<8;i++){
                         if(walk[i]==null){
                             continue;
+                        } else if(walk[i].hasChildNodes()){
+
+                            if(findingBlack.test(walk[i].childNodes[0].id)){
+                                continue;
+                            } else{
+                                walk[i].classList.add("moveTo");
+                            }
+                            
                         } else{
                             if((walk[i].getBoundingClientRect().x + 200 >= this.x) && (walk[i].getBoundingClientRect().x - 200 <= this.x)
                             && (walk[i].getBoundingClientRect().y + 200 >= this.y) && (walk[i].getBoundingClientRect().y - 200 <= this.y)){
@@ -61,7 +68,6 @@ class Knight {
 
                     removeRedColorFromSquares();
                     let number = parseInt(this.parentNode.id.split("square")[1]);
-                    console.log(number);
                     let walk = [document.querySelector(`#square${number-17}`),
                                 document.querySelector(`#square${number-15}`),
                                 document.querySelector(`#square${number-10}`),
@@ -75,6 +81,14 @@ class Knight {
                     for (let i=0; i<8;i++){
                         if(walk[i]==null){
                             continue;
+                        } else if(walk[i].hasChildNodes()){
+
+                            if(findingWhite.test(walk[i].childNodes[0].id)){
+                                continue;
+                            } else{
+                                walk[i].classList.add("moveTo");
+                            }
+                            
                         } else{
                             if((walk[i].getBoundingClientRect().x + 200 >= this.x) && (walk[i].getBoundingClientRect().x - 200 <= this.x)
                             && (walk[i].getBoundingClientRect().y + 200 >= this.y) && (walk[i].getBoundingClientRect().y - 200 <= this.y)){

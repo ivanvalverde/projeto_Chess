@@ -73,9 +73,9 @@ let chessBoard = {
         let bRook2 = new Rook("black");
         let squareRook0 = document.querySelector("#square0");
         let squareRook7 = document.querySelector("#square7");
-        squareRook0.appendChild(bRook1.sprite());
+        squareRook0.appendChild(bRook1.sprite(1));
         squareRook0.classList.add("blackRook");
-        squareRook7.appendChild(bRook2.sprite());
+        squareRook7.appendChild(bRook2.sprite(2));
         squareRook7.classList.add("blackRook");
 
         let bBishop1 = new Bishop("black");
@@ -121,9 +121,9 @@ let chessBoard = {
         let wRook2 = new Rook("white");
         let squareRook56 = document.querySelector("#square56");
         let squareRook63 = document.querySelector("#square63");
-        squareRook56.appendChild(wRook1.sprite());
+        squareRook56.appendChild(wRook1.sprite(1));
         squareRook56.classList.add("whiteRook");
-        squareRook63.appendChild(wRook2.sprite());
+        squareRook63.appendChild(wRook2.sprite(2));
         squareRook63.classList.add("whiteRook");
 
         let wBishop1 = new Bishop("white");

@@ -11,12 +11,14 @@ class Queen {
         if(this._color == "black"){
             let blackQueen = document.createElement("img");
             blackQueen.src = "pngs/blackQueen.png";
+            blackQueen.id = "blackQueen";
             blackQueen.classList.add("pieces");
             return blackQueen;
 
         } else{
             let whiteQueen = document.createElement("img");
             whiteQueen.src = "pngs/whiteQueen.png";
+            whiteQueen.id = "whiteQueen";
             whiteQueen.classList.add("pieces");
             return whiteQueen;
         }

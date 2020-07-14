@@ -11,12 +11,14 @@ class King {
         if(this._color == "black"){
             let blackKing = document.createElement("img");
             blackKing.src = "pngs/blackKing.png";
+            blackKing.id = "blackKing";
             blackKing.classList.add("pieces");
             return blackKing;
 
         } else{
             let whiteKing = document.createElement("img");
             whiteKing.src = "pngs/whiteKing.png";
+            whiteKing.id = "whiteKing";
             whiteKing.classList.add("pieces");
             return whiteKing;
         }

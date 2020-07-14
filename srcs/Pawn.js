@@ -51,7 +51,6 @@ class Pawn {
                 if(whiteTurn == true){
                     removeRedColorFromSquares();
                     let number = parseInt(this.parentNode.id.split("square")[1]);
-                    console.log(number);
                     if((number <= 55) && (number >= 48)){
                         for(let i=0; i < 2;i++){
                             let walk = document.querySelector(`#square${number-(8*(i+1))}`);

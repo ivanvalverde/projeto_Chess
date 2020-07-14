@@ -21,7 +21,6 @@ class Bishop {
                     removeRedColorFromSquares();
                     let number = parseInt(this.parentNode.id.split("square")[1]);
                     let diagonals = [[],[],[],[]];
-                    console.log(diagonals);
 
                     for(let i=0;i<7;i++){
                         diagonals[0].push(document.querySelector(`#square${(number-((i+1)*7))}`))
@@ -92,7 +91,6 @@ class Bishop {
                     removeRedColorFromSquares();
                     let number = parseInt(this.parentNode.id.split("square")[1]);
                     let diagonals = [[],[],[],[]];
-                    console.log(diagonals);
 
                     for(let i=0;i<7;i++){
                         diagonals[0].push(document.querySelector(`#square${(number-((i+1)*7))}`))

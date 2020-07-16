@@ -9,6 +9,12 @@ let chessBoard = {
             i%2==0?boardSquare.classList.add("white") : boardSquare.classList.add("black");
 
             boardSquare.addEventListener("click",function(){
+                if((this.hasChildNodes()) && (this.classList.contains("moveTo"))){
+                    console.log("oi");
+                    let lastClass = this.classList[1];
+                    this.classList.remove(lastClass);
+                    this.removeChild(this.childNodes[0]);
+                }
                 if(regExpMoveTo.test(boardSquare.classList)){
                     elementToMove.parentNode.removeChild(elementToMove);
                     boardSquare.appendChild(elementToMove);
@@ -18,7 +24,7 @@ let chessBoard = {
                     whiteTurn = !whiteTurn;
                     removeRedColorFromSquares();
                 }
-            })
+            });
 
             this.board.appendChild(boardSquare);
             this.squarePosition++;
@@ -32,6 +38,11 @@ let chessBoard = {
             i%2==0?boardSquare.classList.add("black") : boardSquare.classList.add("white");
 
             boardSquare.addEventListener("click",function(){
+                if((this.hasChildNodes()) && (this.classList.contains("moveTo"))){
+                    let lastClass = this.classList[1];
+                    this.classList.remove(lastClass);
+                    this.removeChild(this.childNodes[0]);
+                }
                 if(regExpMoveTo.test(boardSquare.classList)){
                     elementToMove.parentNode.removeChild(elementToMove);
                     boardSquare.appendChild(elementToMove);
@@ -41,7 +52,7 @@ let chessBoard = {
                     whiteTurn = !whiteTurn;
                     removeRedColorFromSquares();
                 }
-            })
+            });
 
             this.board.appendChild(boardSquare);
             this.squarePosition++;

@@ -47,7 +47,7 @@ class Pawn {
 
             whitePawn.addEventListener("click",function(){
 
-                removeRedColorFromSquares();
+                
                 if(whiteTurn == true){
                     removeRedColorFromSquares();
                     let number = parseInt(this.parentNode.id.split("square")[1]);

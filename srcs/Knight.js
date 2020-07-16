@@ -31,20 +31,21 @@ class Knight {
                     for (let i=0; i<8;i++){
                         if(walk[i]==null){
                             continue;
-                        } else if(walk[i].hasChildNodes()){
-
-                            if(findingBlack.test(walk[i].childNodes[0].id)){
-                                continue;
-                            } else{
-                                walk[i].classList.add("moveTo");
-                            }
-                            
                         } else{
                             if((walk[i].getBoundingClientRect().x + 200 >= this.x) && (walk[i].getBoundingClientRect().x - 200 <= this.x)
                             && (walk[i].getBoundingClientRect().y + 200 >= this.y) && (walk[i].getBoundingClientRect().y - 200 <= this.y)){
-                                walk[i].classList.add("moveTo");
-                                elementToMove = this;
+                                
+                                if(walk[i].hasChildNodes()){
+
+                                    if(findingBlack.test(walk[i].childNodes[0].id)){
+                                        continue;
+                                    } else{
+                                        walk[i].classList.add("moveTo");
+                                        elementToMove = this;
+                                    }
                             }
+                            walk[i].classList.add("moveTo");
+                            elementToMove = this;  
                         }
                         
                     }
@@ -52,8 +53,8 @@ class Knight {
                     classToAdd = "blackKnight";
                     classToRemove = "blackKnight";
                 }
-
-            })
+                }
+            });
 
             blackKnight.classList.add("pieces");
             return blackKnight;
@@ -81,20 +82,21 @@ class Knight {
                     for (let i=0; i<8;i++){
                         if(walk[i]==null){
                             continue;
-                        } else if(walk[i].hasChildNodes()){
-
-                            if(findingWhite.test(walk[i].childNodes[0].id)){
-                                continue;
-                            } else{
-                                walk[i].classList.add("moveTo");
-                            }
-                            
                         } else{
                             if((walk[i].getBoundingClientRect().x + 200 >= this.x) && (walk[i].getBoundingClientRect().x - 200 <= this.x)
                             && (walk[i].getBoundingClientRect().y + 200 >= this.y) && (walk[i].getBoundingClientRect().y - 200 <= this.y)){
-                                walk[i].classList.add("moveTo");
-                                elementToMove = this;
+                                
+                                if(walk[i].hasChildNodes()){
+
+                                    if(findingWhite.test(walk[i].childNodes[0].id)){
+                                        continue;
+                                    } else{
+                                        walk[i].classList.add("moveTo");
+                                        elementToMove = this;
+                                    }
                             }
+                            walk[i].classList.add("moveTo");
+                            elementToMove = this;  
                         }
                         
                     }
@@ -102,7 +104,8 @@ class Knight {
                     classToAdd = "whiteKnight";
                     classToRemove = "whiteKnight";
                 }
-            })
+                }
+            });
 
             whiteKnight.classList.add("pieces");
             return whiteKnight;

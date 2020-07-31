@@ -12,8 +12,6 @@ class Rook {
             let blackRook = document.createElement("img");
             blackRook.src = "pngs/blackRook.png";
             blackRook.id = `blackRook${newId}`;
-            let minPosBoardX = document.querySelector("#square0");
-            let maxPosBoardX = document.querySelector("#square7");
 
             blackRook.addEventListener("click",function(){
 

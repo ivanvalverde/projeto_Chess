@@ -10,7 +10,6 @@ let chessBoard = {
 
             boardSquare.addEventListener("click",function(){
                 if((this.hasChildNodes()) && (this.classList.contains("moveTo"))){
-                    console.log("oi");
                     let lastClass = this.classList[1];
                     this.classList.remove(lastClass);
                     this.removeChild(this.childNodes[0]);
@@ -162,6 +161,685 @@ let chessBoard = {
             squarePawns.classList.add("whitePawn");
             squarePawns.appendChild(wPawn.sprite(i-47));
         }
+
+    },
+
+    blackSight: function(){
+
+        let blackSight = [];
+        let minPosBoardX = document.querySelector("#square0");
+        let maxPosBoardX = document.querySelector("#square7");
+        
+        //Adding queen sight
+        
+        let blackQueenSight = document.querySelector("#blackQueen");
+        let number = parseInt(blackQueenSight.parentNode.id.split("square")[1]);
+        let linesQueen = [[],[],[],[]];
+        let diagonalsQueen = [[],[],[],[]];
+
+        for(let i=0;i<7;i++){
+            diagonalsQueen[0].push(document.querySelector(`#square${(number-((i+1)*7))}`))
+            diagonalsQueen[1].push(document.querySelector(`#square${(number+((i+1)*7))}`))
+            diagonalsQueen[2].push(document.querySelector(`#square${(number-((i+1)*9))}`))
+            diagonalsQueen[3].push(document.querySelector(`#square${(number+((i+1)*9))}`))
+        }
+
+        for(let i=0;i<7;i++){
+            linesQueen[0].push(document.querySelector(`#square${(number-((i+1)*8))}`))
+            linesQueen[1].push(document.querySelector(`#square${(number+((i+1)*8))}`))
+            linesQueen[2].push(document.querySelector(`#square${(number-((i+1)))}`))
+            linesQueen[3].push(document.querySelector(`#square${(number+((i+1)))}`))
+        }
+
+        for (let i=0; i<diagonalsQueen.length;i++){
+            for(let j=0; j<diagonalsQueen[0].length;j++){
+                if(diagonalsQueen[i][j]==null){
+                    break;
+                } else if((blackQueenSight.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                ((i==1) || (i==2))){
+                    break;
+
+                } else if((blackQueenSight.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                ((i==0) || (i==3))){
+                    break;
+
+                }else if(diagonalsQueen[i][j].hasChildNodes()){
+
+                    if(diagonalsQueen[i][j].childNodes[0].classList.contains("pieces")){
+
+                        blackSight.push(diagonalsQueen[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else if((diagonalsQueen[i][j].getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) ||
+                            (diagonalsQueen[i][j].getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x)){
+
+                        blackSight.push(diagonalsQueen[i][j]);
+                    break;
+
+                } else{
+
+                    blackSight.push(diagonalsQueen[i][j]); 
+                } 
+            }
+        }
+
+        for (let i=0; i<linesQueen.length;i++){
+            for(let j=0; j<linesQueen[0].length;j++){
+                if(linesQueen[i][j]==null){
+                    break;
+                } else if((blackQueenSight.parentNode.getBoundingClientRect().y != linesQueen[i][j].getBoundingClientRect().y) &&
+                (i==2) ){
+                    break;
+
+                } else if((blackQueenSight.parentNode.getBoundingClientRect().y != linesQueen[i][j].getBoundingClientRect().y) &&
+                (i==3)){
+                    break;
+
+                }else if(linesQueen[i][j].hasChildNodes()){
+
+                    if(linesQueen[i][j].childNodes[0].classList.contains("pieces")){
+
+                            blackSight.push(linesQueen[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else{
+
+                    blackSight.push(linesQueen[i][j])
+                } 
+            }
+        }
+
+        //Finishing queen sight
+
+        //Adding bishop sight
+
+        for(let a=1; a<3;a++){
+
+            let blackBishopSight = document.querySelector(`#blackBishop${a}`)
+            let number = parseInt(blackBishopSight.parentNode.id.split("square")[1]);
+            let diagonals = [[],[],[],[]];
+
+            for(let i=0;i<7;i++){
+                diagonals[0].push(document.querySelector(`#square${(number-((i+1)*7))}`))
+                diagonals[1].push(document.querySelector(`#square${(number+((i+1)*7))}`))
+                diagonals[2].push(document.querySelector(`#square${(number-((i+1)*9))}`))
+                diagonals[3].push(document.querySelector(`#square${(number+((i+1)*9))}`))
+            }
+
+            for (let i=0; i<diagonals.length;i++){
+                for(let j=0; j<diagonals[0].length;j++){
+                    if(diagonals[i][j]==null){
+                        break;
+                    } else if((blackBishopSight.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                    ((i==1) || (i==2))){
+                        break;
+
+                    } else if((blackBishopSight.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                    ((i==0) || (i==3))){
+                        break;
+
+                    }else if(diagonals[i][j].hasChildNodes()){
+
+                        if(diagonals[i][j].childNodes[0].classList.contains("pieces")){
+
+                            blackSight.push(diagonals[i][j]);
+                            break;
+
+                        } else{
+                            break;
+                        }
+
+                    } else if((diagonals[i][j].getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) ||
+                                (diagonals[i][j].getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x)){
+
+                            blackSight.push(diagonals[i][j]);
+                            break;
+
+                    } else{
+
+                        blackSight.push(diagonals[i][j]);
+                    } 
+                }
+            }
+        }
+
+        //Finishing bishop sight
+
+        //Adding rook sight
+        for(let a=1; a<3;a++){
+            let blackRookSight = document.querySelector(`#blackRook${a}`)
+            let number = parseInt(blackRookSight.parentNode.id.split("square")[1]);
+            let lines = [[],[],[],[]];
+
+                for(let i=0;i<7;i++){
+                    lines[0].push(document.querySelector(`#square${(number-((i+1)*8))}`))
+                    lines[1].push(document.querySelector(`#square${(number+((i+1)*8))}`))
+                    lines[2].push(document.querySelector(`#square${(number-((i+1)))}`))
+                    lines[3].push(document.querySelector(`#square${(number+((i+1)))}`))
+                }
+
+                for (let i=0; i<lines.length;i++){
+                    for(let j=0; j<lines[0].length;j++){
+                        if(lines[i][j]==null){
+                            break;
+                        } else if((blackRookSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                        (i==2) ){
+                            break;
+
+                        } else if((blackRookSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                        (i==3)){
+                            break;
+
+                        }else if(lines[i][j].hasChildNodes()){
+
+                            if(lines[i][j].childNodes[0].classList.contains("pieces")){
+
+                                blackSight.push(lines[i][j]);
+                                break;
+
+                            } else{
+                                break;
+                            }
+
+                        } else{
+
+                            blackSight.push(lines[i][j]); 
+                        } 
+                    }
+                }
+        }
+
+        //Finishing rook sight
+
+        //Adding knight sight
+
+        for(let a=1; a<3;a++){
+
+            let blackKnightSight = document.querySelector(`#blackKnight${a}`)
+            let number = parseInt(blackKnightSight.parentNode.id.split("square")[1]);
+            let walk = [document.querySelector(`#square${number-17}`),
+                        document.querySelector(`#square${number-15}`),
+                        document.querySelector(`#square${number-10}`),
+                        document.querySelector(`#square${number-6}`),
+                        document.querySelector(`#square${number+6}`),
+                        document.querySelector(`#square${number+10}`),
+                        document.querySelector(`#square${number+15}`),
+                        document.querySelector(`#square${number+17}`)
+                        ];
+
+            for (let i=0; i<8;i++){
+                if(walk[i]==null){
+                    continue;
+                } else{
+                    if((walk[i].getBoundingClientRect().x + 200 >= blackKnightSight.x) && (walk[i].getBoundingClientRect().x - 200 <= blackKnightSight.x)
+                    && (walk[i].getBoundingClientRect().y + 200 >= blackKnightSight.y) && (walk[i].getBoundingClientRect().y - 200 <= blackKnightSight.y)){
+                        
+                        blackSight.push(walk[i]);
+                    }
+                
+                }
+            }
+        }
+
+        //Finishing knight sight
+
+        //Adding king sight
+
+        let blackKingSight = document.querySelector("#blackKing")
+        let numberSqr = parseInt(blackKingSight.parentNode.id.split("square")[1]);
+        let lines = [[],[],[],[]];
+        let diagonals = [[],[],[],[]];
+
+        for(let i=0;i<1;i++){
+            diagonals[0].push(document.querySelector(`#square${(numberSqr-((i+1)*7))}`))
+            diagonals[1].push(document.querySelector(`#square${(numberSqr+((i+1)*7))}`))
+            diagonals[2].push(document.querySelector(`#square${(numberSqr-((i+1)*9))}`))
+            diagonals[3].push(document.querySelector(`#square${(numberSqr+((i+1)*9))}`))
+        }
+
+        for(let i=0;i<1;i++){
+            lines[0].push(document.querySelector(`#square${(numberSqr-((i+1)*8))}`))
+            lines[1].push(document.querySelector(`#square${(numberSqr+((i+1)*8))}`))
+            lines[2].push(document.querySelector(`#square${(numberSqr-((i+1)))}`))
+            lines[3].push(document.querySelector(`#square${(numberSqr+((i+1)))}`))
+        }
+
+        for (let i=0; i<diagonals.length;i++){
+            for(let j=0; j<diagonals[0].length;j++){
+                if(diagonals[i][j]==null){
+                    break;
+                } else if((blackKingSight.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                ((i==1) || (i==2))){
+                    break;
+
+                } else if((blackKingSight.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                ((i==0) || (i==3))){
+                    break;
+
+                }else if(diagonals[i][j].hasChildNodes()){
+
+                    if(diagonals[i][j].childNodes[0].classList.contains("pieces")){
+
+                        blackSight.push(diagonals[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else if((diagonals[i][j].getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) ||
+                            (diagonals[i][j].getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x)){
+
+                    blackSight.push(diagonals[i][j]);
+                    break;
+
+                } else{
+
+                    blackSight.push(diagonals[i][j]); 
+                } 
+            }
+        }
+
+        for (let i=0; i<lines.length;i++){
+            for(let j=0; j<lines[0].length;j++){
+                if(lines[i][j]==null){
+                    break;
+                } else if((blackKingSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                (i==2) ){
+                    break;
+
+                } else if((blackKingSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                (i==3)){
+                    break;
+
+                }else if(lines[i][j].hasChildNodes()){
+
+                    if(lines[i][j].childNodes[0].classList.contains("pieces")){
+
+                            blackSight.push(lines[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else{
+
+                    blackSight.push(lines[i][j]);
+                } 
+            }
+        }
+
+        //Adding pawn sight
+
+        for(let a=1; a<9;a++){
+
+            let blackPawnSight = document.querySelector(`#blackPawn${a}`)
+            let number = parseInt(blackPawnSight.parentNode.id.split("square")[1]);
+            let diagonalsAttack = [document.querySelector(`#square${(number+7)}`),
+                                    document.querySelector(`#square${(number+9)}`)];
+            
+            for(let i=0; i<diagonalsAttack.length;i++){
+                if((diagonalsAttack[i].getBoundingClientRect().x -80 < blackPawnSight.parentNode.getBoundingClientRect().x) 
+                && (diagonalsAttack[i].getBoundingClientRect().x +80 > blackPawnSight.parentNode.getBoundingClientRect().x)){
+                blackSight.push(diagonalsAttack[i]);
+                }
+            }
+
+        }
+
+        //Finishing pawn sight
+
+        return blackSight;
+
+    },
+
+
+
+    whiteSight: function(){
+
+        let whiteSight = [];
+        let minPosBoardX = document.querySelector("#square0");
+        let maxPosBoardX = document.querySelector("#square7");
+        
+        //Adding queen sight
+        
+        let whiteQueenSight = document.querySelector("#whiteQueen");
+        let number = parseInt(whiteQueenSight.parentNode.id.split("square")[1]);
+        let linesQueen = [[],[],[],[]];
+        let diagonalsQueen = [[],[],[],[]];
+
+        for(let i=0;i<7;i++){
+            diagonalsQueen[0].push(document.querySelector(`#square${(number-((i+1)*7))}`))
+            diagonalsQueen[1].push(document.querySelector(`#square${(number+((i+1)*7))}`))
+            diagonalsQueen[2].push(document.querySelector(`#square${(number-((i+1)*9))}`))
+            diagonalsQueen[3].push(document.querySelector(`#square${(number+((i+1)*9))}`))
+        }
+
+        for(let i=0;i<7;i++){
+            linesQueen[0].push(document.querySelector(`#square${(number-((i+1)*8))}`))
+            linesQueen[1].push(document.querySelector(`#square${(number+((i+1)*8))}`))
+            linesQueen[2].push(document.querySelector(`#square${(number-((i+1)))}`))
+            linesQueen[3].push(document.querySelector(`#square${(number+((i+1)))}`))
+        }
+
+        for (let i=0; i<diagonalsQueen.length;i++){
+            for(let j=0; j<diagonalsQueen[0].length;j++){
+                if(diagonalsQueen[i][j]==null){
+                    break;
+                } else if((whiteQueenSight.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                ((i==1) || (i==2))){
+                    break;
+
+                } else if((whiteQueenSight.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                ((i==0) || (i==3))){
+                    break;
+
+                }else if(diagonalsQueen[i][j].hasChildNodes()){
+
+                    if(diagonalsQueen[i][j].childNodes[0].classList.contains("pieces")){
+
+                        whiteSight.push(diagonalsQueen[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else if((diagonalsQueen[i][j].getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) ||
+                            (diagonalsQueen[i][j].getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x)){
+
+                        whiteSight.push(diagonalsQueen[i][j]);
+                    break;
+
+                } else{
+
+                    whiteSight.push(diagonalsQueen[i][j]); 
+                } 
+            }
+        }
+
+        for (let i=0; i<linesQueen.length;i++){
+            for(let j=0; j<linesQueen[0].length;j++){
+                if(linesQueen[i][j]==null){
+                    break;
+                } else if((whiteQueenSight.parentNode.getBoundingClientRect().y != linesQueen[i][j].getBoundingClientRect().y) &&
+                (i==2) ){
+                    break;
+
+                } else if((whiteQueenSight.parentNode.getBoundingClientRect().y != linesQueen[i][j].getBoundingClientRect().y) &&
+                (i==3)){
+                    break;
+
+                }else if(linesQueen[i][j].hasChildNodes()){
+
+                    if(linesQueen[i][j].childNodes[0].classList.contains("pieces")){
+
+                        whiteSight.push(linesQueen[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else{
+
+                    whiteSight.push(linesQueen[i][j])
+                } 
+            }
+        }
+
+        //Finishing queen sight
+
+        //Adding bishop sight
+
+        for(let a=1; a<3;a++){
+
+            let whiteBishopSight = document.querySelector(`#whiteBishop${a}`)
+            let number = parseInt(whiteBishopSight.parentNode.id.split("square")[1]);
+            let diagonals = [[],[],[],[]];
+
+            for(let i=0;i<7;i++){
+                diagonals[0].push(document.querySelector(`#square${(number-((i+1)*7))}`))
+                diagonals[1].push(document.querySelector(`#square${(number+((i+1)*7))}`))
+                diagonals[2].push(document.querySelector(`#square${(number-((i+1)*9))}`))
+                diagonals[3].push(document.querySelector(`#square${(number+((i+1)*9))}`))
+            }
+
+            for (let i=0; i<diagonals.length;i++){
+                for(let j=0; j<diagonals[0].length;j++){
+                    if(diagonals[i][j]==null){
+                        break;
+                    } else if((whiteBishopSight.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                    ((i==1) || (i==2))){
+                        break;
+
+                    } else if((whiteBishopSight.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                    ((i==0) || (i==3))){
+                        break;
+
+                    }else if(diagonals[i][j].hasChildNodes()){
+
+                        if(diagonals[i][j].childNodes[0].classList.contains("pieces")){
+
+                            whiteSight.push(diagonals[i][j]);
+                            break;
+
+                        } else{
+                            break;
+                        }
+
+                    } else if((diagonals[i][j].getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) ||
+                                (diagonals[i][j].getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x)){
+
+                            whiteSight.push(diagonals[i][j]);
+                            break;
+
+                    } else{
+
+                        whiteSight.push(diagonals[i][j]);
+                    } 
+                }
+            }
+        }
+
+        //Finishing bishop sight
+
+        //Adding rook sight
+        for(let a=1; a<3;a++){
+            let whiteRookSight = document.querySelector(`#whiteRook${a}`)
+            let number = parseInt(whiteRookSight.parentNode.id.split("square")[1]);
+            let lines = [[],[],[],[]];
+
+                for(let i=0;i<7;i++){
+                    lines[0].push(document.querySelector(`#square${(number-((i+1)*8))}`))
+                    lines[1].push(document.querySelector(`#square${(number+((i+1)*8))}`))
+                    lines[2].push(document.querySelector(`#square${(number-((i+1)))}`))
+                    lines[3].push(document.querySelector(`#square${(number+((i+1)))}`))
+                }
+
+                for (let i=0; i<lines.length;i++){
+                    for(let j=0; j<lines[0].length;j++){
+                        if(lines[i][j]==null){
+                            break;
+                        } else if((whiteRookSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                        (i==2) ){
+                            break;
+
+                        } else if((whiteRookSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                        (i==3)){
+                            break;
+
+                        }else if(lines[i][j].hasChildNodes()){
+
+                            if(lines[i][j].childNodes[0].classList.contains("pieces")){
+
+                                whiteSight.push(lines[i][j]);
+                                break;
+
+                            } else{
+                                break;
+                            }
+
+                        } else{
+
+                            whiteSight.push(lines[i][j]); 
+                        } 
+                    }
+                }
+        }
+
+        //Finishing rook sight
+
+        //Adding knight sight
+
+        for(let a=1; a<3;a++){
+
+            let whiteKnightSight = document.querySelector(`#whiteKnight${a}`)
+            let number = parseInt(whiteKnightSight.parentNode.id.split("square")[1]);
+            let walk = [document.querySelector(`#square${number-17}`),
+                        document.querySelector(`#square${number-15}`),
+                        document.querySelector(`#square${number-10}`),
+                        document.querySelector(`#square${number-6}`),
+                        document.querySelector(`#square${number+6}`),
+                        document.querySelector(`#square${number+10}`),
+                        document.querySelector(`#square${number+15}`),
+                        document.querySelector(`#square${number+17}`)
+                        ];
+
+            for (let i=0; i<8;i++){
+                if(walk[i]==null){
+                    continue;
+                } else{
+                    if((walk[i].getBoundingClientRect().x + 200 >= whiteKnightSight.x) && (walk[i].getBoundingClientRect().x - 200 <= whiteKnightSight.x)
+                    && (walk[i].getBoundingClientRect().y + 200 >= whiteKnightSight.y) && (walk[i].getBoundingClientRect().y - 200 <= whiteKnightSight.y)){
+                        
+                        whiteSight.push(walk[i]);
+                    }
+                
+                }
+            }
+        }
+
+        //Finishing knight sight
+
+        //Adding king sight
+
+        let whiteKingSight = document.querySelector("#whiteKing")
+        let numberSqr = parseInt(whiteKingSight.parentNode.id.split("square")[1]);
+        let lines = [[],[],[],[]];
+        let diagonals = [[],[],[],[]];
+
+        for(let i=0;i<1;i++){
+            diagonals[0].push(document.querySelector(`#square${(numberSqr-((i+1)*7))}`))
+            diagonals[1].push(document.querySelector(`#square${(numberSqr+((i+1)*7))}`))
+            diagonals[2].push(document.querySelector(`#square${(numberSqr-((i+1)*9))}`))
+            diagonals[3].push(document.querySelector(`#square${(numberSqr+((i+1)*9))}`))
+        }
+
+        for(let i=0;i<1;i++){
+            lines[0].push(document.querySelector(`#square${(numberSqr-((i+1)*8))}`))
+            lines[1].push(document.querySelector(`#square${(numberSqr+((i+1)*8))}`))
+            lines[2].push(document.querySelector(`#square${(numberSqr-((i+1)))}`))
+            lines[3].push(document.querySelector(`#square${(numberSqr+((i+1)))}`))
+        }
+
+        for (let i=0; i<diagonals.length;i++){
+            for(let j=0; j<diagonals[0].length;j++){
+                if(diagonals[i][j]==null){
+                    break;
+                } else if((whiteKingSight.parentNode.getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) &&
+                ((i==1) || (i==2))){
+                    break;
+
+                } else if((whiteKingSight.parentNode.getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x) &&
+                ((i==0) || (i==3))){
+                    break;
+
+                }else if(diagonals[i][j].hasChildNodes()){
+
+                    if(diagonals[i][j].childNodes[0].classList.contains("pieces")){
+
+                        whiteSight.push(diagonals[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else if((diagonals[i][j].getBoundingClientRect().x == minPosBoardX.getBoundingClientRect().x) ||
+                            (diagonals[i][j].getBoundingClientRect().x == maxPosBoardX.getBoundingClientRect().x)){
+
+                    whiteSight.push(diagonals[i][j]);
+                    break;
+
+                } else{
+
+                    whiteSight.push(diagonals[i][j]); 
+                } 
+            }
+        }
+
+        for (let i=0; i<lines.length;i++){
+            for(let j=0; j<lines[0].length;j++){
+                if(lines[i][j]==null){
+                    break;
+                } else if((whiteKingSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                (i==2) ){
+                    break;
+
+                } else if((whiteKingSight.parentNode.getBoundingClientRect().y != lines[i][j].getBoundingClientRect().y) &&
+                (i==3)){
+                    break;
+
+                }else if(lines[i][j].hasChildNodes()){
+
+                    if(lines[i][j].childNodes[0].classList.contains("pieces")){
+
+                        whiteSight.push(lines[i][j]);
+                        break;
+
+                    } else{
+                        break;
+                    }
+
+                } else{
+
+                    whiteSight.push(lines[i][j]);
+                } 
+            }
+        }
+
+        //Adding pawn sight
+
+        for(let a=1; a<9;a++){
+
+            let whitePawnSight = document.querySelector(`#whitePawn${a}`)
+            let number = parseInt(whitePawnSight.parentNode.id.split("square")[1]);
+            let diagonalsAttack = [document.querySelector(`#square${(number-7)}`),
+                                    document.querySelector(`#square${(number-9)}`)];
+            
+            for(let i=0; i<diagonalsAttack.length;i++){
+                
+                if((diagonalsAttack[i].getBoundingClientRect().x -80 < whitePawnSight.parentNode.getBoundingClientRect().x) 
+                && (diagonalsAttack[i].getBoundingClientRect().x +80 > whitePawnSight.parentNode.getBoundingClientRect().x)){
+                whiteSight.push(diagonalsAttack[i]);
+                }
+            }
+
+        }
+
+        //Finishing pawn sight
+
+        return whiteSight;
 
     }
 }
